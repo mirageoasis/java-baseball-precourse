@@ -27,7 +27,7 @@ public class GameFlowController {
 			List<Integer> secret = secretModel.getSecret();
 
 			while (true) {
-				System.out.println("서로 다른 3자리 숫자를 입력하세요 (각 자리 1-9):");
+				resultView.showPromptForGuess();
 				String line = gameInput.readLine();
 				if (!playerInputValidator.isValidInput(line)) {
 					resultView.showError("입력은 서로 다른 3개의 숫자(1-9)여야 합니다.");
@@ -48,6 +48,6 @@ public class GameFlowController {
 				}
 			}
 		}
-		System.out.println("게임을 종료합니다.");
+		resultView.showExitMessage();
 	}
 }
