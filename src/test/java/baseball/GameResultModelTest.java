@@ -1,6 +1,7 @@
 package baseball;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -35,7 +36,7 @@ class GameResultModelTest {
 	@Test
 	void showHint_prints_ball_and_strike() {
 		view.showHint(new HintResultModel(2, 1));
-		assertEquals("1볼 2스트라이크\n", outContent.toString());
+		assertEquals("2스트라이크 1볼\n", outContent.toString());
 	}
 
 	@Test
