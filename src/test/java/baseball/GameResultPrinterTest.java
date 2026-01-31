@@ -10,15 +10,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class GameResultModelTest {
+class GameResultPrinterTest {
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	private final PrintStream originalOut = System.out;
-	private GameResultModel view;
+	private GameOutput view;
 
 	@BeforeEach
 	void setUp() {
 		System.setOut(new PrintStream(outContent));
-		view = new GameResultModel();
+		view = new GameOutput();
 		outContent.reset();
 	}
 

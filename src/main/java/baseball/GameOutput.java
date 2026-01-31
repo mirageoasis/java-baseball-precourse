@@ -1,7 +1,7 @@
 package baseball;
 
-public class GameResultModel {
-	
+public class GameOutput {
+
 	public void showHint(HintResultModel result) {
 		System.out.println(result.toString());
 	}
