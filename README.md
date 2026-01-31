@@ -25,3 +25,42 @@
 
 * 계산된 볼, 스트라이크 개수를 출력한다 (예: 1볼 1스트라이크, 낫싱).
 * 3개의 숫자를 모두 맞히면(3스트라이크) 게임 종료 문구를 출력한다.
+
+```mermaid
+classDiagram
+    class GameFlowController {
+        <<Controller>>
+        +게임_전체_흐름_제어()
+        +재시작_여부_판단()
+    }
+
+    class SecretNumberModel {
+        <<Model>>
+        -정답_숫자_데이터
+        +랜덤_3자리_생성()
+    }
+
+    class HintCalculatorModel {
+        <<Model>>
+        +스트라이크_볼_판정()
+        +결과_데이터_생성()
+    }
+
+    class PlayerInputView {
+        <<View>>
+        +숫자_입력_받기()
+        +입력_값_유효성_검증()
+    }
+
+    class GameResultView {
+        <<View>>
+        +힌트_메시지_출력()
+        +승리_및_종료_출력()
+        +에러_메시지_출력()
+    }
+
+    GameFlowController --> SecretNumberModel: 정답 생성 요청
+    GameFlowController --> PlayerInputView: 사용자 입력 요청
+    GameFlowController --> HintCalculatorModel: 판정 로직 실행
+    GameFlowController --> GameResultView: 화면 출력 요청
+```
