@@ -30,37 +30,45 @@
 classDiagram
     class GameFlowController {
         <<Controller>>
-        +게임_전체_흐름_제어()
-        +재시작_여부_판단()
+        +start(): void
+        +askRestart(): boolean
+        -readLine(): String
     }
 
     class SecretNumberModel {
         <<Model>>
-        -정답_숫자_데이터
-        +랜덤_3자리_생성()
+        -secret: List<Integer>
+        +generateSecret(): void
+        +getSecret(): List<Integer>
     }
 
     class HintCalculatorModel {
         <<Model>>
-        +스트라이크_볼_판정()
-        +결과_데이터_생성()
+        +calculate(secret: List<Integer>, guess: List<Integer>): HintResultModel
     }
 
-    class PlayerInputView {
+    class PlayerInputValidator {
+        <<Validator>>
+        +isValidInput(input: String): boolean
+        +toDigits(input: String): List<Integer>
+    }
+
+    class GameResultModel {
         <<View>>
-        +숫자_입력_받기()
-        +입력_값_유효성_검증()
+        +showHint(result: HintResultModel): void
+        +showWinAndPromptRestart(): void
+        +showError(message: String): void
     }
 
-    class GameResultView {
-        <<View>>
-        +힌트_메시지_출력()
-        +승리_및_종료_출력()
-        +에러_메시지_출력()
+    class HintResultModel {
+        <<Model>>
+        +strikes: int
+        +balls: int
+        +toString(): String
     }
 
-    GameFlowController --> SecretNumberModel: 정답 생성 요청
-    GameFlowController --> PlayerInputView: 사용자 입력 요청
-    GameFlowController --> HintCalculatorModel: 판정 로직 실행
-    GameFlowController --> GameResultView: 화면 출력 요청
+    GameFlowController --> SecretNumberModel: "정답 생성 요청"
+    GameFlowController --> PlayerInputValidator: "입력 유효성 검사/숫자 변환 요청"
+    GameFlowController --> HintCalculatorModel: "판정 로직 실행"
+    GameFlowController --> GameResultModel: "결과/메시지 출력 요청"
 ```
