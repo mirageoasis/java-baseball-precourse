@@ -30,7 +30,6 @@ public class GameFlowController {
 		while (running) {
 			secretModel.generateSecret();
 			List<Integer> secret = secretModel.getSecret();
-			System.out.println("숫자의 값은: " + secretModel.getSecret());
 
 			while (true) {
 				System.out.println("서로 다른 3자리 숫자를 입력하세요 (각 자리 1-9):");
