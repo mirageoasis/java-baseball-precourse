@@ -28,47 +28,69 @@
 
 ```mermaid
 classDiagram
+    class Application {
+        <<Entrypoint>>
+        +main(args: String[]): void
+    }
+
     class GameFlowController {
         <<Controller>>
+        -secretModel: SecretNumberModel
+        -playerInputValidator: PlayerInputValidator
+        -hintModel: HintCalculatorModel
+        -gameOutput: GameOutput
+        -gameInput: GameInput
         +start(): void
-        +askRestart(): boolean
-        -readLine(): String
+        -askRestart(): boolean
     }
 
-    class SecretNumberModel {
-        <<Model>>
-        -secret: List<Integer>
-        +generateSecret(): void
-        +getSecret(): List<Integer>
-    }
-
-    class HintCalculatorModel {
-        <<Model>>
-        +calculate(secret: List<Integer>, guess: List<Integer>): HintResultModel
+    class GameInput {
+        <<IO>>
+        -scanner: java.util.Scanner
+        +readLine(): String
     }
 
     class PlayerInputValidator {
         <<Validator>>
         +isValidInput(input: String): boolean
-        +toDigits(input: String): List<Integer>
+        +toDigits(input: String): java.util.List<Integer>
     }
 
-    class GameResultModel {
-        <<View>>
-        +showHint(result: HintResultModel): void
-        +showWinAndPromptRestart(): void
-        +showError(message: String): void
+    class SecretNumberModel {
+        <<Model>>
+        -secret: java.util.List<Integer>
+        +generateSecret(): void
+        +getSecret(): java.util.List<Integer>
+    }
+
+    class HintCalculatorModel {
+        <<Model>>
+        +calculate(secret: java.util.List<Integer>, guess: java.util.List<Integer>): HintResultModel
     }
 
     class HintResultModel {
-        <<Model>>
-        +strikes: int
-        +balls: int
+        <<ValueObject>>
+        -strikes: int
+        -balls: int
+        +getStrikes(): int
         +toString(): String
     }
 
+    class GameOutput {
+        <<View>>
+        +showPromptForGuess(): void
+        +showHint(result: HintResultModel): void
+        +showWinAndPromptRestart(): void
+        +showError(message: String): void
+        +showExitMessage(): void
+    }
+
+    Application --> GameFlowController: starts
     GameFlowController --> SecretNumberModel: "정답 생성 요청"
-    GameFlowController --> PlayerInputValidator: "입력 유효성 검사/숫자 변환 요청"
+    GameFlowController --> PlayerInputValidator: "입력 검증/숫자 변환 요청"
     GameFlowController --> HintCalculatorModel: "판정 로직 실행"
-    GameFlowController --> GameResultModel: "결과/메시지 출력 요청"
+    GameFlowController --> GameOutput: "결과/메시지 출력 요청"
+    GameFlowController --> GameInput: "입력(readLine) 요청"
+    HintCalculatorModel ..> HintResultModel: returns
+    GameOutput ..> HintResultModel: displays
 ```
