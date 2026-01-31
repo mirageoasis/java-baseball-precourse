@@ -3,7 +3,7 @@ package baseball;
 import java.util.List;
 
 public class HintCalculatorModel {
-	public HintResult calculate(List<Integer> secret, List<Integer> guess) {
+	public HintResultModel calculate(List<Integer> secret, List<Integer> guess) {
 		int strikes = 0;
 		int balls = 0;
 		for (int i = 0; i < 3; i++) {
@@ -13,6 +13,6 @@ public class HintCalculatorModel {
 				balls++;
 			}
 		}
-		return new HintResult(strikes, balls);
+		return new HintResultModel(strikes, balls);
 	}
 }

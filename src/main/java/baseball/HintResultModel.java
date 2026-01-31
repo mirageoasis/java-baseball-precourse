@@ -1,10 +1,10 @@
 package baseball;
 
-public class HintResult {
+public class HintResultModel {
 	private final int strikes;
 	private final int balls;
 
-	public HintResult(int strikes, int balls) {
+	public HintResultModel(int strikes, int balls) {
 		this.strikes = strikes;
 		this.balls = balls;
 	}

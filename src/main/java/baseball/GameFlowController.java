@@ -6,7 +6,7 @@ public class GameFlowController {
 	private final SecretNumberModel secretModel = new SecretNumberModel();
 	private final PlayerInputValidator playerInputValidator = new PlayerInputValidator();
 	private final HintCalculatorModel hintModel = new HintCalculatorModel();
-	private final GameResultView resultView = new GameResultView();
+	private final GameResultModel resultView = new GameResultModel();
 
 	public void start() {
 		boolean running = true;
@@ -23,7 +23,7 @@ public class GameFlowController {
 					continue;
 				}
 				List<Integer> guess = playerInputValidator.toDigits(line);
-				HintResult hint = hintModel.calculate(secret, guess);
+				HintResultModel hint = hintModel.calculate(secret, guess);
 				resultView.showHint(hint);
 				if (hint.getStrikes() == 3) {
 					resultView.showWinAndPromptRestart();
