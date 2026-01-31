@@ -6,11 +6,11 @@ public class GameInput {
 
 	private final Scanner scanner;
 
-	public GameInput() {
-		this.scanner = new Scanner(System.in);
+	public GameInput(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
 	public String readLine() {
-		return scanner.nextLine().trim();
+		return scanner.nextLine().strip();
 	}
 }

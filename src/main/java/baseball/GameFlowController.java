@@ -1,13 +1,14 @@
 package baseball;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class GameFlowController {
 	private final SecretNumberModel secretModel = new SecretNumberModel();
 	private final PlayerInputValidator playerInputValidator = new PlayerInputValidator();
 	private final HintCalculatorModel hintModel = new HintCalculatorModel();
 	private final GameOutput gameOutput = new GameOutput();
-	private final GameInput gameInput = new GameInput();
+	private final GameInput gameInput = new GameInput(new Scanner(System.in));
 
 	private boolean askRestart() {
 		while (true) {
