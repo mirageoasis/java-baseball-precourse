@@ -3,15 +3,8 @@ package baseball;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 
 public class PlayerInputValidator {
-	private final Scanner scanner = new Scanner(System.in);
-
-	public String readLine() {
-		return scanner.nextLine().trim();
-	}
-
 	public boolean isValidInput(String s) {
 		if (s == null)
 			return false;
